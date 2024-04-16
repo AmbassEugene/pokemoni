@@ -4,26 +4,17 @@ import {getResource} from '../../util/api/apiRequests';
 import {apiEndpoints} from '../../util/api/apiEndpoints';
 import {BaseScreen} from '../../components/BaseScreen/BaseScreen';
 import {AppText, Card} from '../../util/baseStyles';
+import {getPokemonImageUri} from '../../util/formatters/getImage';
+import {useGetResources} from '../../util/hooks/useGetResources';
 
 const HomeScreen = () => {
-  const [pokemonData, setPokemonData] = useState({});
-  const [error, setError] = useState();
+  const {pokemonData, error, loading} = useGetResources(
+    apiEndpoints.BASE_ENDPOINT,
+  );
 
-  // TODO: Move to custom hook
-  useEffect(() => {
-    getPokemons(apiEndpoints.BASE_ENDPOINT);
-  }, []);
-
-  const getPokemons = async (endpoint: string) => {
-    const {responseError, data} = await getResource(endpoint);
-    setPokemonData(data);
-    setError(responseError);
-  };
-
-  console.log('I am here ', {...pokemonData});
-
+  console.log(pokemonData);
   return (
-    <BaseScreen title={false} backBtn={false}>
+    <BaseScreen backBtn={false}>
       <Card>
         <AppText>I am a Card</AppText>
       </Card>

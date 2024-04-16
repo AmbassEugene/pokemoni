@@ -1,14 +1,16 @@
 import {View, Text} from 'react-native';
-import React, {PropsWithChildren} from 'react';
+import React, {PropsWithChildren, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {ScrollView} from 'react-native-virtualized-view';
 
 type BaseScreenProps = {
   title?: string;
   backBtn?: boolean;
+  children: ReactNode;
+  header?: boolean;
 };
 
-const BaseScreen = ({children, title, backBtn, header}) => {
+const BaseScreen = ({children, title, backBtn, header}: BaseScreenProps) => {
   return (
     <Wrapper>
       {header && (

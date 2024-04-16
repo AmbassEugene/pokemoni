@@ -5,17 +5,17 @@ export const AppText = styled.Text`
     props.semiBold
       ? 'Mulish-SemiBold'
       : props.bold
-      ? 'Mulish-Bold'
-      : 'Mulish-Regular'};
+        ? 'Mulish-Bold'
+        : 'Mulish-Regular'};
 
   font-size: ${props =>
     props.small
       ? '12px'
       : props.large
-      ? '24px'
-      : props.fontSize
-      ? props.fontSize
-      : '14px'};
+        ? '24px'
+        : props.fontSize
+          ? props.fontSize
+          : '14px'};
 
   color: ${props => props.theme.PRIMARY_TEXT_COLOR};
 
