@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {getResource} from '../../util/api/apiRequests';
 import {apiEndpoints} from '../../util/api/apiEndpoints';
 import {BaseScreen} from '../../components/BaseScreen/BaseScreen';
+import {AppText, Card} from '../../util/baseStyles';
 
 const HomeScreen = () => {
   const [pokemonData, setPokemonData] = useState({});
@@ -19,13 +20,13 @@ const HomeScreen = () => {
     setError(responseError);
   };
 
-  console.log('I am here ', {pokemonData});
+  console.log('I am here ', {...pokemonData});
 
   return (
     <BaseScreen title={false} backBtn={false}>
-      <View>
-        <Text>HomeScreen</Text>
-      </View>
+      <Card>
+        <AppText>I am a Card</AppText>
+      </Card>
     </BaseScreen>
   );
 };

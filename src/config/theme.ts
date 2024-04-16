@@ -6,7 +6,7 @@ const colors = {
 export const lightTheme = {
   ...colors,
   PRIMARY_BACKGROUND_COLOR: '#F8FAFC',
-  SECONDARY_BACKGROUND_COLOR: '#B8BFCC',
+  SECONDARY_BACKGROUND_COLOR: '#e2e8f0',
   PRIMARY_TEXT_COLOR: '#131314',
   SECONDARY_TEXT_COLOR: 'rgba(19, 19, 20, 0.6)',
 };
