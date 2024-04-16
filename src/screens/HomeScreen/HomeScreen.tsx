@@ -7,15 +7,15 @@ const HomeScreen = () => {
   const [pokemonData, setPokemonData] = useState({});
   const [error, setError] = useState();
 
+  // TODO: Move to custom hook
   useEffect(() => {
-    getPokemon(apiEndpoints.BASE_ENDPOINT);
+    getPokemons(apiEndpoints.BASE_ENDPOINT);
   }, []);
 
-  const getPokemon = async (endpoint: string) => {
+  const getPokemons = async (endpoint: string) => {
     const {responseError, data} = await getResource(endpoint);
     setPokemonData(data);
     setError(responseError);
-    console.log(data);
   };
 
   return (

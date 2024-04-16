@@ -15,8 +15,8 @@ type SectionProps = PropsWithChildren<{
 }>;
 
 function App(): React.JSX.Element {
-  return <HomeScreen />;
-  // return <Routes />;
+  // return <HomeScreen />;
+  return <Routes />;
 }
 
 export default App;
