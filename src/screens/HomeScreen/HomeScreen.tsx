@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {apiEndpoints} from '../../util/api/apiEndpoints';
 import {BaseScreen} from '../../components/BaseScreen/BaseScreen';
 import {AppText, Card} from '../../util/baseStyles';
-import {getPokemonImageUri} from '../../util/formatters/getImage';
+import {getPokemonImgUri} from '../../util/formatters/getImage';
 import {useGetResources} from '../../util/hooks/useGetResources';
 import {FlashList} from '@shopify/flash-list';
 import {PokemonCard} from '../../components/PokemonCard/PokemonCard';
@@ -25,9 +25,7 @@ const HomeScreen = () => {
   );
 
   // Checks if resourceData is not empty
-  const hasData = resourceData?.results?.length > 0;
-
-  console.log(resourceData?.results);
+  const hasData: {} = resourceData?.results?.length > 0;
 
   return (
     <BaseScreen backBtn={false}>

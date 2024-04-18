@@ -1,21 +1,18 @@
 import styled from 'styled-components/native';
-import {AppText, Card} from '../../util/baseStyles';
 import {ImageBackground, TouchableOpacity, ViewProps} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {SvgUri} from 'react-native-svg';
+import {AppText, Card} from '../../util/baseStyles';
 import {capitalizeFormatter} from '../../util/formatters/textFormatter';
+import {getPokemonImgUri} from '../../util/formatters/getImage';
+import {PokemonImageComp} from '../PokemonImage/PokemonImage';
 
 const Wrapper = styled(Card)`
   border-radius: 10px;
   margin: 10px;
   position: relative;
-  padding: 0;
+  padding: 5px;
   width: 100%;
-`;
-
-const PokemonImage = styled.Image<PokemonCardStyleProps>`
-  margin-top: 10px;
-  height: 150px;
-  width: 150px;
-  border-radius: 75px;
 `;
 
 const PokemonName = styled(AppText)<PokemonCardStyleProps>`
@@ -23,26 +20,29 @@ const PokemonName = styled(AppText)<PokemonCardStyleProps>`
   color: ${props => props.theme.SECONDARY_COLOR};
   font-weight: 900;
   font-size: 18px;
-  margin: 10px;
+  margin: 8px;
   background-color: transparent;
 `;
 
-const BackgroundBlur = styled(ImageBackground)<PokemonCardStyleProps>``;
+export const PokemonCard = ({imageUri, name, link}: PokemonCardProps) => {
+  const navigation = useNavigation();
 
-export const PokemonCard = ({imageUri, title, itemIndex}: PokemonCardProps) => {
-  const rotateRight = itemIndex && itemIndex % 2 === 0;
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('Detail', {
+          link,
+          name,
+        })
+      }>
       <Wrapper>
-        <BackgroundBlur src={imageUri} blurRadius={10}>
-          <PokemonImage
-            rotateRight={rotateRight}
-            resizeMode="contain"
-            src={imageUri}
-          />
-
-          <PokemonName>{capitalizeFormatter(title)}</PokemonName>
-        </BackgroundBlur>
+        <PokemonImageComp
+          link={link}
+          width="150px"
+          height="150px"
+          backgroundWidth="107%">
+          <PokemonName>{capitalizeFormatter(name)}</PokemonName>
+        </PokemonImageComp>
       </Wrapper>
     </TouchableOpacity>
   );
@@ -50,8 +50,8 @@ export const PokemonCard = ({imageUri, title, itemIndex}: PokemonCardProps) => {
 
 type PokemonCardProps = {
   imageUri: string;
-  title: string;
-  itemIndex?: number;
+  name: string;
+  link: string;
 };
 
 interface PokemonCardStyleProps extends ViewProps {
