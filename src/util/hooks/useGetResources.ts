@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {getResource} from '../api/apiRequests';
 
 export const useGetResources = (apiEndpoint: string) => {
-  const [pokemonData, setPokemonData] = useState({});
+  const [resourceData, setResourceData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
@@ -14,14 +14,15 @@ export const useGetResources = (apiEndpoint: string) => {
   const fetchData = async (endpoint: string) => {
     setLoading(true);
     const {responseError, data} = await getResource(endpoint);
-    setPokemonData(data);
+    setResourceData(data);
     setError(responseError);
     setLoading(false);
   };
 
   return {
-    pokemonData,
+    resourceData,
     error,
     loading,
+    getNext: fetchData,
   };
 };

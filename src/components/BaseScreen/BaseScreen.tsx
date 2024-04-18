@@ -20,7 +20,7 @@ const BaseScreen = ({children, title, backBtn, header}: BaseScreenProps) => {
         </Header>
       )}
 
-      <ScrollView>{children}</ScrollView>
+      <ScrollView centerContent={true}>{children}</ScrollView>
     </Wrapper>
   );
 };
