@@ -16,6 +16,7 @@ export const StatList = ({stats}: []) => {
           key={index}
           statName={data.stat.name}
           width={String(data.base_stat) + '%'}
+          stat={data.base_stat}
         />
       ))}
     </Wrapper>

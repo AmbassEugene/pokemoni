@@ -12,19 +12,25 @@ const StatbarWrap = styled.View`
   width: 80px;
 `;
 
-const StatBar = styled.View<StatsCompStyleProps>`
-  width: ${props => props.width};
-  background-color: ${props => props.theme.SECONDARY_COLOR};
+const StatBar = styled.View<StatBarStyleProps>`
+  width: ${props => props.stat?.toString() + '%'};
+  background-color: ${props =>
+    props.levelUp ? props.theme.SECONDARY_COLOR : props.theme.PRIMARY_COLOR};
   height: 5px;
 `;
 
-export const StatsComp = ({width = '50%', statName}: StatsCompProps) => {
+export const StatsComp = ({
+  width = '50%',
+  stat = 0,
+  statName,
+}: StatsCompProps) => {
+  console.log({stat, statName});
   return (
     <Wrapper>
       <FlexView>
         <AppText small>{capitalizeFormatter(statName)}</AppText>
         <StatbarWrap>
-          <StatBar width={width} />
+          <StatBar levelUp={stat >= 100} stat={stat >= 100 ? stat / 2 : stat} />
         </StatbarWrap>
       </FlexView>
     </Wrapper>
@@ -34,8 +40,10 @@ export const StatsComp = ({width = '50%', statName}: StatsCompProps) => {
 type StatsCompProps = {
   width: string;
   statName: string;
+  stat: number;
 };
 
-type StatsCompStyleProps = {
-  width?: string;
+type StatBarStyleProps = {
+  stat: string;
+  levelUp: boolean;
 };

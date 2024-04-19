@@ -83,22 +83,22 @@ export const PokemonDetailScreen = ({route}) => {
             <SectionWrap>
               <SectionComp title="Details">
                 <DetailsItemWrap>
-                  <DetailsLabelItem>Name:</DetailsLabelItem>
+                  <DetailsLabelItem semiBold>Name:</DetailsLabelItem>
                   <AppText bold>
                     {capitalizeFormatter(pokemonDets.name)}
                   </AppText>
                 </DetailsItemWrap>
                 <DetailsItemWrap>
-                  <DetailsLabelItem>Weight:</DetailsLabelItem>
+                  <DetailsLabelItem semiBold>Weight:</DetailsLabelItem>
                   <AppText>{pokemonDets.weight + 'kg'}</AppText>
                 </DetailsItemWrap>
                 <DetailsItemWrap>
-                  <DetailsLabelItem>Height:</DetailsLabelItem>
+                  <DetailsLabelItem semiBold>Height:</DetailsLabelItem>
                   <AppText>{pokemonDets.height + 'm'}</AppText>
                 </DetailsItemWrap>
 
                 <DetailsItemWrap>
-                  <DetailsLabelItem>Type:</DetailsLabelItem>
+                  <DetailsLabelItem semiBold>Type:</DetailsLabelItem>
                   <FlexView>
                     {pokemonDets.types.map((data, index) => (
                       <Tag key={index}>{'#' + data?.type.name}</Tag>
@@ -107,7 +107,7 @@ export const PokemonDetailScreen = ({route}) => {
                 </DetailsItemWrap>
 
                 <DetailsItemWrap>
-                  <DetailsLabelItem>Abillities:</DetailsLabelItem>
+                  <DetailsLabelItem semiBold>Abillities:</DetailsLabelItem>
                   <FlexView>
                     {pokemonDets.abilities.map((data, index) => (
                       <Tag key={index}>{'#' + data?.ability.name}</Tag>
