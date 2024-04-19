@@ -1,16 +1,14 @@
 import React, {useState} from 'react';
 import {FlashList} from '@shopify/flash-list';
 import {PokemonCard} from '../PokemonCard/PokemonCard';
-import {getPokemonImgUri} from '../../util/formatters/getImage';
 import styled from 'styled-components/native';
-import {Alert, TouchableOpacity} from 'react-native';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 import {AppText} from '../../util/baseStyles';
 import {SmallLoader} from '../LoadingComp/SmallLoader';
 import {getResource} from '../../util/api/apiRequests';
-import {useGetResources} from '../../util/hooks/useGetResources';
+import {type PokemonList} from '../../types';
 
 const Wrapper = styled.View`
-  /* flex: 1; */
   margin-bottom: 10px;
 `;
 
@@ -19,65 +17,65 @@ const LoadMoreText = styled(AppText)`
   padding-horizontal: 5px;
 `;
 
-const PokemonListComp = ({resource, fetchData}: PokemonListProps) => {
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 2,
+  },
+});
+
+const PokemonListComp = ({resource}: PokemonListProps) => {
   const [loading, setLoading] = useState(false);
   const [pokemons, setPokemons] = useState(resource.results);
   const [next, setNext] = useState(resource.next);
 
-  const getMorePokemons = async (endPoint: string) => {
+  const getMorePokemons = async (endPoint: string | null) => {
+    if (!endPoint) {
+      return;
+    }
+
     setLoading(true);
-    const {responseError, data} = await getResource(endPoint);
-    setPokemons(prev => [...prev, ...data.results]);
-    setNext(data.next);
+    const {data} = await getResource<PokemonList>(endPoint);
+    if (data) {
+      setPokemons(prev => [...prev, ...data.results]);
+      setNext(data.next);
+    }
     setLoading(false);
   };
-
-  // const {resourceData, error, loading, fetchData} = useGetResources(
-  //   resource.next,
-  // );
-
-  const FooterComp = () => (
-    <TouchableOpacity onPress={() => getMorePokemons(next)}>
-      <LoadMoreText center>Load More...</LoadMoreText>
-    </TouchableOpacity>
-  );
 
   return (
     <Wrapper>
       <FlashList
         data={pokemons}
-        renderItem={({item, index}) => (
-          <PokemonCard
-            link={item.url}
-            name={item.name}
-            imageUri={getPokemonImgUri(item.url)}
-            itemIndex={index}
-          />
+        renderItem={({item}) => (
+          <PokemonCard link={item.url} name={item.name} />
         )}
         estimatedItemSize={190}
         numColumns={2}
-        // centerContent={true}
-        contentContainerStyle={{
-          paddingHorizontal: 2,
-        }}
-        // onEndReachedThreshold={0.8}
-        // onEndReached={() => getMorePokemons(next)}
-        ListFooterComponent={loading ? SmallLoader : FooterComp}
+        contentContainerStyle={styles.container}
+        ListFooterComponent={
+          loading ? (
+            <SmallLoader />
+          ) : (
+            <FooterComp onHandlePress={() => getMorePokemons(next)} />
+          )
+        }
       />
     </Wrapper>
   );
 };
 
+type FooterCompProps = {
+  onHandlePress: () => void;
+};
+
+const FooterComp = ({onHandlePress}: FooterCompProps) => (
+  <TouchableOpacity onPress={onHandlePress}>
+    <LoadMoreText center>Load More...</LoadMoreText>
+  </TouchableOpacity>
+);
+
 export default PokemonListComp;
 
 type PokemonListProps = {
-  resource: {
-    results: [
-      {
-        name: string;
-        url: string;
-      },
-    ];
-    next: string;
-  };
+  resource: PokemonList;
 };

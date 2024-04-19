@@ -1,10 +1,10 @@
-export const getResource = async (endPoint: string) => {
+export async function getResource<T>(endPoint: string) {
   let responseError: any = null;
-  let data: [] | {} = [];
+  let data: T | undefined;
 
   try {
     const res = await fetch(endPoint);
-    data = await res.json();
+    data = (await res.json()) as T;
   } catch (err) {
     responseError = err;
   } finally {
@@ -13,4 +13,4 @@ export const getResource = async (endPoint: string) => {
       data,
     };
   }
-};
+}

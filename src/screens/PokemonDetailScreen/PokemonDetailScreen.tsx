@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Animated from 'react-native-reanimated';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {BaseScreen} from '../../components/BaseScreen/BaseScreen';
-import {getResource} from '../../util/api/apiRequests';
 import styled from 'styled-components/native';
 import {capitalizeFormatter} from '../../util/formatters/textFormatter';
 import {PokemonImageComp} from '../../components/PokemonImage/PokemonImage';
@@ -12,7 +12,7 @@ import {SpriteComp} from '../../components/SpriteComp/SpriteComp';
 import {useHoverAnimations} from '../../util/hooks/useHoverAimation';
 import {LoadingComp} from '../../components/LoadingComp/LoadingComp';
 import {useGetResources} from '../../util/hooks/useGetResources';
-import {apiEndpoints} from '../../util/api/apiEndpoints';
+import {type NavigatorStack, type PokemonItem} from '../../types';
 
 const Wrapper = styled.View`
   position: relative;
@@ -46,9 +46,11 @@ const CollectBtnText = styled(AppText)`
   elevation: 1;
 `;
 
-export const PokemonDetailScreen = ({route}) => {
+type Props = NativeStackScreenProps<NavigatorStack, 'Detail'>;
+
+export const PokemonDetailScreen = ({route}: Props) => {
   const {link, name} = route.params;
-  const {resourceData, error, loading} = useGetResources(link);
+  const {resourceData, loading} = useGetResources<PokemonItem>(link);
 
   const isLoaded =
     resourceData !== undefined && Object.keys(resourceData).length > 1;

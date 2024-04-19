@@ -4,7 +4,9 @@
  * @returns {string}
  */
 export const capitalizeFormatter = (str: string) => {
-  if (!str) return;
+  if (!str) {
+    return;
+  }
 
   return str
     .toLowerCase()

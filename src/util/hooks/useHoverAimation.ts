@@ -15,11 +15,7 @@ export const useHoverAnimations = (initialOffset: number) => {
   const offset = useSharedValue(initialOffset);
 
   const animatedStyles = useAnimatedStyle(() => ({
-    transform: [
-      {translateX: offset.value},
-      {translateY: -offset.value},
-      // {translateX: -offset.value},
-    ],
+    transform: [{translateX: offset.value}, {translateY: -offset.value}],
   }));
 
   useEffect(() => {
@@ -28,7 +24,7 @@ export const useHoverAnimations = (initialOffset: number) => {
       -1,
       true,
     );
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {animatedStyles};
 };

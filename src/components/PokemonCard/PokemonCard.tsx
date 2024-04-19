@@ -1,11 +1,14 @@
+import React from 'react';
 import styled from 'styled-components/native';
-import {ImageBackground, TouchableOpacity, ViewProps} from 'react-native';
+import {TouchableOpacity, ViewProps} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {SvgUri} from 'react-native-svg';
+
 import {AppText, Card} from '../../util/baseStyles';
 import {capitalizeFormatter} from '../../util/formatters/textFormatter';
-import {getPokemonImgUri} from '../../util/formatters/getImage';
+
 import {PokemonImageComp} from '../PokemonImage/PokemonImage';
+import {type NavigatorStack} from '../../types';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const Wrapper = styled(Card)`
   border-radius: 10px;
@@ -25,7 +28,7 @@ const PokemonName = styled(AppText)<PokemonCardStyleProps>`
 `;
 
 export const PokemonCard = ({name, link}: PokemonCardProps) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps['navigation']>();
 
   return (
     <TouchableOpacity
@@ -56,3 +59,5 @@ type PokemonCardProps = {
 interface PokemonCardStyleProps extends ViewProps {
   rotateRight?: number | boolean;
 }
+
+type NavigationProps = NativeStackScreenProps<NavigatorStack, 'Detail'>;

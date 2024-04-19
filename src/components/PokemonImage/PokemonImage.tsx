@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 import {getPokemonImgUri} from '../../util/formatters/getImage';
 import {SvgUri} from 'react-native-svg';
-import {Alert, ImageBackground} from 'react-native';
-import {ReactNode} from 'react';
+import {ImageBackground} from 'react-native';
+import React, {ReactNode} from 'react';
 
 const PokemonImage = styled(SvgUri)`
   flex: 1;

@@ -1,9 +1,7 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import styled from 'styled-components/native';
 import {AppText, Card} from '../../util/baseStyles';
 import {capitalizeFormatter} from '../../util/formatters/textFormatter';
-import {getPokemonImgUri} from '../../util/formatters/getImage';
 
 const Wrapper = styled(Card)`
   background-color: ${props => props.theme.PRIMARY_BACKGROUND_COLOR};

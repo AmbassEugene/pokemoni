@@ -1,9 +1,7 @@
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {ScrollView} from 'react-native-virtualized-view';
-import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {AppText} from '../../util/baseStyles';
 
 const Wrapper = styled.View`
   flex: 1;
