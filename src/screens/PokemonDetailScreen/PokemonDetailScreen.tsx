@@ -11,6 +11,8 @@ import {StatList} from '../../components/StatsList/StatList';
 import {SpriteComp} from '../../components/SpriteComp/SpriteComp';
 import {useHoverAnimations} from '../../util/hooks/useHoverAimation';
 import {LoadingComp} from '../../components/LoadingComp/LoadingComp';
+import {useGetResources} from '../../util/hooks/useGetResources';
+import {apiEndpoints} from '../../util/api/apiEndpoints';
 
 const Wrapper = styled.View`
   position: relative;
@@ -45,26 +47,13 @@ const CollectBtnText = styled(AppText)`
 `;
 
 export const PokemonDetailScreen = ({route}) => {
-  const [pokemonDets, setPokemon] = useState({});
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const {link, name} = route.params;
+  const {resourceData, error, loading} = useGetResources(link);
+
+  const isLoaded =
+    resourceData !== undefined && Object.keys(resourceData).length > 1;
 
   const {animatedStyles} = useHoverAnimations(10);
-
-  const {link, name} = route.params;
-
-  // TODO: move to custom hooks
-  useEffect(() => {
-    getPokemonDetails();
-  }, []);
-
-  const getPokemonDetails = async () => {
-    setLoading(true);
-    const {responseError, data} = await getResource(link);
-    setPokemon(data);
-    setError(responseError);
-    setLoading(false);
-  };
 
   return (
     <BaseScreen backBtn header title={capitalizeFormatter(name)}>
@@ -79,7 +68,7 @@ export const PokemonDetailScreen = ({route}) => {
           />
         </Animated.View>
 
-        {Object.keys(pokemonDets).length > 1 && (
+        {isLoaded && (
           <>
             {/* Start of Details Section */}
             <SectionWrap>
@@ -87,22 +76,22 @@ export const PokemonDetailScreen = ({route}) => {
                 <DetailsItemWrap>
                   <DetailsLabelItem semiBold>Name:</DetailsLabelItem>
                   <AppText bold>
-                    {capitalizeFormatter(pokemonDets.name)}
+                    {capitalizeFormatter(resourceData.name)}
                   </AppText>
                 </DetailsItemWrap>
                 <DetailsItemWrap>
                   <DetailsLabelItem semiBold>Weight:</DetailsLabelItem>
-                  <AppText>{pokemonDets.weight + 'kg'}</AppText>
+                  <AppText>{resourceData.weight + 'kg'}</AppText>
                 </DetailsItemWrap>
                 <DetailsItemWrap>
                   <DetailsLabelItem semiBold>Height:</DetailsLabelItem>
-                  <AppText>{pokemonDets.height + 'm'}</AppText>
+                  <AppText>{resourceData.height + 'm'}</AppText>
                 </DetailsItemWrap>
 
                 <DetailsItemWrap>
                   <DetailsLabelItem semiBold>Type:</DetailsLabelItem>
                   <FlexView>
-                    {pokemonDets.types.map((data, index) => (
+                    {resourceData.types.map((data, index) => (
                       <Tag key={index}>{'#' + data?.type.name}</Tag>
                     ))}
                   </FlexView>
@@ -111,7 +100,7 @@ export const PokemonDetailScreen = ({route}) => {
                 <DetailsItemWrap>
                   <DetailsLabelItem semiBold>Abillities:</DetailsLabelItem>
                   <FlexView>
-                    {pokemonDets.abilities.map((data, index) => (
+                    {resourceData.abilities.map((data, index) => (
                       <Tag key={index}>{'#' + data?.ability.name}</Tag>
                     ))}
                   </FlexView>
@@ -122,7 +111,7 @@ export const PokemonDetailScreen = ({route}) => {
             {/* Start of Stat Section */}
             <SectionWrap>
               <SectionComp title="Stats">
-                <StatList stats={pokemonDets.stats} />
+                <StatList stats={resourceData.stats} />
               </SectionComp>
             </SectionWrap>
 
@@ -132,26 +121,27 @@ export const PokemonDetailScreen = ({route}) => {
                 <FlexView>
                   <SpriteComp
                     name="back"
-                    link={pokemonDets.sprites.back_default}
+                    link={resourceData.sprites.back_default}
                   />
                   <SpriteComp
                     name="front"
-                    link={pokemonDets.sprites.front_default}
+                    link={resourceData.sprites.front_default}
                   />
                   <SpriteComp
                     name="shiny back"
-                    link={pokemonDets.sprites.back_shiny}
+                    link={resourceData.sprites.back_shiny}
                   />
 
                   <SpriteComp
                     name="shiny front"
-                    link={pokemonDets.sprites.front_shiny}
+                    link={resourceData.sprites.front_shiny}
                   />
                 </FlexView>
               </SectionComp>
             </SectionWrap>
           </>
         )}
+
         <CollectBtn>
           <CollectBtnText>Collect</CollectBtnText>
         </CollectBtn>

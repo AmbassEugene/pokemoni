@@ -24,7 +24,7 @@ const PokemonName = styled(AppText)<PokemonCardStyleProps>`
   background-color: transparent;
 `;
 
-export const PokemonCard = ({imageUri, name, link}: PokemonCardProps) => {
+export const PokemonCard = ({name, link}: PokemonCardProps) => {
   const navigation = useNavigation();
 
   return (
@@ -49,7 +49,6 @@ export const PokemonCard = ({imageUri, name, link}: PokemonCardProps) => {
 };
 
 type PokemonCardProps = {
-  imageUri: string;
   name: string;
   link: string;
 };

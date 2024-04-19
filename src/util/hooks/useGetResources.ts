@@ -23,6 +23,6 @@ export const useGetResources = (apiEndpoint: string) => {
     resourceData,
     error,
     loading,
-    getNext: fetchData,
+    fetchData,
   };
 };

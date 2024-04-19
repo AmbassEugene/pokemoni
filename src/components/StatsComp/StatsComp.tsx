@@ -20,7 +20,6 @@ const StatBar = styled.View<StatBarStyleProps>`
 `;
 
 export const StatsComp = ({stat = 0, statName}: StatsCompProps) => {
-  console.log({stat, statName});
   return (
     <Wrapper>
       <FlexView>
