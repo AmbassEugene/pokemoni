@@ -10,6 +10,7 @@ import {SectionComp} from '../../components/SectionComp/SectionComp';
 import {StatList} from '../../components/StatsList/StatList';
 import {SpriteComp} from '../../components/SpriteComp/SpriteComp';
 import {useHoverAnimations} from '../../util/hooks/useHoverAimation';
+import {LoadingComp} from '../../components/LoadingComp/LoadingComp';
 
 const Wrapper = styled.View`
   position: relative;
@@ -68,6 +69,7 @@ export const PokemonDetailScreen = ({route}) => {
   return (
     <BaseScreen backBtn header title={capitalizeFormatter(name)}>
       <Wrapper>
+        {loading && <LoadingComp />}
         <Animated.View style={animatedStyles}>
           <PokemonImageComp
             link={link}

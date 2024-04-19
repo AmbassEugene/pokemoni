@@ -9,15 +9,12 @@ import {useGetResources} from '../../util/hooks/useGetResources';
 import {FlashList} from '@shopify/flash-list';
 import {PokemonCard} from '../../components/PokemonCard/PokemonCard';
 import PokemonListComp from '../../components/PokemonListComp/PokemonListComp';
+import {LoadingComp} from '../../components/LoadingComp/LoadingComp';
+import styled from 'styled-components/native';
 
-const DATA = [
-  {
-    title: 'First Item',
-  },
-  {
-    title: 'Second Item',
-  },
-];
+const Wrapper = styled.View`
+  flex: 1;
+`;
 
 const HomeScreen = () => {
   const {resourceData, error, loading, getNext} = useGetResources(
@@ -29,10 +26,10 @@ const HomeScreen = () => {
 
   return (
     <BaseScreen backBtn={false}>
-      {/* <View style={{flex: 1, backgroundColor: 'pink', padding: 20}}> */}
-      {loading && <AppText>Loading ...</AppText>}
-      {hasData && <PokemonListComp resource={resourceData} />}
-      {/* </View> */}
+      <Wrapper>
+        {loading && <LoadingComp />}
+        {hasData && <PokemonListComp resource={resourceData} />}
+      </Wrapper>
     </BaseScreen>
   );
 };

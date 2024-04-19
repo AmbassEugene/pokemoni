@@ -9,7 +9,7 @@ import {PokemonImageComp} from '../PokemonImage/PokemonImage';
 
 const Wrapper = styled(Card)`
   border-radius: 10px;
-  margin: 10px;
+  margin: 7.5px;
   position: relative;
   padding: 5px;
   width: 100%;

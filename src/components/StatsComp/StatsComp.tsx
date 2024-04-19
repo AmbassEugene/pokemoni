@@ -19,11 +19,7 @@ const StatBar = styled.View<StatBarStyleProps>`
   height: 5px;
 `;
 
-export const StatsComp = ({
-  width = '50%',
-  stat = 0,
-  statName,
-}: StatsCompProps) => {
+export const StatsComp = ({stat = 0, statName}: StatsCompProps) => {
   console.log({stat, statName});
   return (
     <Wrapper>
@@ -38,12 +34,11 @@ export const StatsComp = ({
 };
 
 type StatsCompProps = {
-  width: string;
   statName: string;
   stat: number;
 };
 
 type StatBarStyleProps = {
-  stat: string;
+  stat: number;
   levelUp: boolean;
 };

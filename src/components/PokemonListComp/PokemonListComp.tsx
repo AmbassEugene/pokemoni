@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 import {Alert} from 'react-native';
 
 const Wrapper = styled.View`
-  flex: 1;
+  /* flex: 1; */
 `;
 
 const PokemonListComp = ({resource}: PokemonListProps) => {
@@ -22,10 +22,12 @@ const PokemonListComp = ({resource}: PokemonListProps) => {
             itemIndex={index}
           />
         )}
-        estimatedItemSize={200}
+        estimatedItemSize={190}
         numColumns={2}
         // centerContent={true}
-        contentContainerStyle={{padding: 2}}
+        contentContainerStyle={{
+          paddingHorizontal: 2,
+        }}
       />
     </Wrapper>
   );

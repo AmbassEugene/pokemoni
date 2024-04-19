@@ -52,6 +52,7 @@ const SmallBackgroundImage = styled(BigBackgroundImage)`
 
 const Content = styled.View`
   padding: 15px;
+  flex: 1;
 `;
 
 const BaseScreen = ({children, title, backBtn, header}: BaseScreenProps) => {
