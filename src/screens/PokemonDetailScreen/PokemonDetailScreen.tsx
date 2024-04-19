@@ -1,10 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  withRepeat,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import {BaseScreen} from '../../components/BaseScreen/BaseScreen';
 import {getResource} from '../../util/api/apiRequests';
 import styled from 'styled-components/native';
@@ -13,9 +8,12 @@ import {PokemonImageComp} from '../../components/PokemonImage/PokemonImage';
 import {AppText, Tag, FlexView} from '../../util/baseStyles';
 import {SectionComp} from '../../components/SectionComp/SectionComp';
 import {StatList} from '../../components/StatsList/StatList';
+import {SpriteComp} from '../../components/SpriteComp/SpriteComp';
+import {useHoverAnimations} from '../../util/hooks/useHoverAimation';
 
 const Wrapper = styled.View`
   position: relative;
+  padding-bottom: 30px;
 `;
 
 const SectionWrap = styled.View`
@@ -30,30 +28,33 @@ const DetailsLabelItem = styled(AppText)`
   font-size: 14px;
 `;
 
+const CollectBtn = styled.TouchableOpacity`
+  background-color: ${props => props.theme.SECONDARY_COLOR};
+  margin-bottom: 30px;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 15px;
+`;
+
+const CollectBtnText = styled(AppText)`
+  font-size: 20px;
+  font-weight: bold;
+  align-self: center;
+  elevation: 1;
+`;
+
 export const PokemonDetailScreen = ({route}) => {
   const [pokemonDets, setPokemon] = useState({});
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
-  const offset = useSharedValue(10);
-
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{translateX: offset.value}, {translateY: offset.value}],
-  }));
+  const {animatedStyles} = useHoverAnimations(10);
 
   const {link, name} = route.params;
 
   // TODO: move to custom hooks
   useEffect(() => {
     getPokemonDetails();
-  }, []);
-
-  useEffect(() => {
-    offset.value = withRepeat(
-      withTiming(-offset.value, {duration: 1500}),
-      -1,
-      true,
-    );
   }, []);
 
   const getPokemonDetails = async () => {
@@ -89,11 +90,11 @@ export const PokemonDetailScreen = ({route}) => {
                 </DetailsItemWrap>
                 <DetailsItemWrap>
                   <DetailsLabelItem>Weight:</DetailsLabelItem>
-                  <AppText>{pokemonDets.weight / 10 + 'kg'}</AppText>
+                  <AppText>{pokemonDets.weight + 'kg'}</AppText>
                 </DetailsItemWrap>
                 <DetailsItemWrap>
                   <DetailsLabelItem>Height:</DetailsLabelItem>
-                  <AppText>{pokemonDets.height / 10 + 'm'}</AppText>
+                  <AppText>{pokemonDets.height + 'm'}</AppText>
                 </DetailsItemWrap>
 
                 <DetailsItemWrap>
@@ -126,11 +127,32 @@ export const PokemonDetailScreen = ({route}) => {
             {/* Start of Sprites Section */}
             <SectionWrap>
               <SectionComp title="Sprites">
-                <AppText>Details</AppText>
+                <FlexView>
+                  <SpriteComp
+                    name="back"
+                    link={pokemonDets.sprites.back_default}
+                  />
+                  <SpriteComp
+                    name="front"
+                    link={pokemonDets.sprites.front_default}
+                  />
+                  <SpriteComp
+                    name="shiny back"
+                    link={pokemonDets.sprites.back_shiny}
+                  />
+
+                  <SpriteComp
+                    name="shiny front"
+                    link={pokemonDets.sprites.front_shiny}
+                  />
+                </FlexView>
               </SectionComp>
             </SectionWrap>
           </>
         )}
+        <CollectBtn>
+          <CollectBtnText>Collect</CollectBtnText>
+        </CollectBtn>
       </Wrapper>
     </BaseScreen>
   );

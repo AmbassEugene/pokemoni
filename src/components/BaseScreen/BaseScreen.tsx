@@ -3,11 +3,11 @@ import styled from 'styled-components/native';
 import {ScrollView} from 'react-native-virtualized-view';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {AppText} from '../../util/baseStyles';
 
 const Wrapper = styled.View`
   flex: 1;
   background-color: ${props => props.theme.PRIMARY_BACKGROUND_COLOR};
-  padding-bottom: 30px;
 `;
 const Header = styled.View`
   background-color: ${props => props.theme.SECONDARY_BACKGROUND_COLOR};

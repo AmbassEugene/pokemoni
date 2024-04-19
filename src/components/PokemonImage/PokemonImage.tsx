@@ -3,6 +3,8 @@ import {getPokemonImgUri} from '../../util/formatters/getImage';
 import {SvgUri} from 'react-native-svg';
 import {ImageBackground} from 'react-native';
 import {ReactNode} from 'react';
+import Animated from 'react-native-reanimated';
+import {useHoverAnimations} from '../../util/hooks/useHoverAimation';
 
 const PokemonImage = styled(SvgUri)`
   flex: 1;
