@@ -29,6 +29,7 @@ export const LoadingComp = () => {
     <Wrapper>
       <Animated.View style={animatedStyle}>
         <LoadingImage
+          alt="pokemon loading"
           source={require('../../../assets/images/loadingBall.png')}
         />
       </Animated.View>

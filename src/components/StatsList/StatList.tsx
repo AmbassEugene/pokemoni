@@ -1,4 +1,3 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import {StatsComp} from '../StatsComp/StatsComp';
 import styled from 'styled-components/native';

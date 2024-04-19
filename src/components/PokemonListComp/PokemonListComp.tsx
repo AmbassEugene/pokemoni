@@ -7,9 +7,11 @@ import {Alert, TouchableOpacity} from 'react-native';
 import {AppText} from '../../util/baseStyles';
 import {SmallLoader} from '../LoadingComp/SmallLoader';
 import {getResource} from '../../util/api/apiRequests';
+import {useGetResources} from '../../util/hooks/useGetResources';
 
 const Wrapper = styled.View`
   /* flex: 1; */
+  margin-bottom: 10px;
 `;
 
 const LoadMoreText = styled(AppText)`
@@ -17,7 +19,7 @@ const LoadMoreText = styled(AppText)`
   padding-horizontal: 5px;
 `;
 
-const PokemonListComp = ({resource}: PokemonListProps) => {
+const PokemonListComp = ({resource, fetchData}: PokemonListProps) => {
   const [loading, setLoading] = useState(false);
   const [pokemons, setPokemons] = useState(resource.results);
   const [next, setNext] = useState(resource.next);
@@ -29,6 +31,10 @@ const PokemonListComp = ({resource}: PokemonListProps) => {
     setNext(data.next);
     setLoading(false);
   };
+
+  // const {resourceData, error, loading, fetchData} = useGetResources(
+  //   resource.next,
+  // );
 
   const FooterComp = () => (
     <TouchableOpacity onPress={() => getMorePokemons(next)}>

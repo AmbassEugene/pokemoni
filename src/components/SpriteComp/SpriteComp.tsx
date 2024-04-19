@@ -19,8 +19,6 @@ const SpriteImage = styled.Image`
 `;
 
 export const SpriteComp = ({link, name}: SpriteCompProps) => {
-  console.log('🚀 ~ SpriteComp ~ link:', link);
-
   return (
     <Wrapper>
       <AppText bold small right>

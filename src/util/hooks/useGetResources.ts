@@ -8,9 +8,8 @@ export const useGetResources = (apiEndpoint: string) => {
 
   useEffect(() => {
     fetchData(apiEndpoint);
-  }, [apiEndpoint]);
+  }, []);
 
-  // Refactor this using promises inside the useEffect hook
   const fetchData = async (endpoint: string) => {
     setLoading(true);
     const {responseError, data} = await getResource(endpoint);
