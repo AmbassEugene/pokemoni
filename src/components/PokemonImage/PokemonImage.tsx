@@ -46,3 +46,7 @@ type PokemonImageCompProps = {
 type BackgroundBlurStyleProps = {
   backgroundWidth: string;
 };
+
+// /Users/eugene/.rvm/gems/ruby-2.7.2/bin:/Users/eugene/.rvm/gems/ruby-2.7.2@global/bin:/Users/eugene/.rvm/rubies/ruby-2.7.2/bin:/Users/eugene/.nvm/versions/node/v20.2.0/bin:/Users/eugene/.yarn/bin:/Users/eugene/.config/yarn/global/node_modules/.bin:/Volumes/Ambass-EXT/opt/anaconda3/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/eugene/Library/Android/sdk/platform-tools:/Users/eugene/.rvm/bin
+
+// export ANDROID_HOME=/Users/eugene/Library/Android/build-tools/34.0.0

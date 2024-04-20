@@ -2,7 +2,7 @@
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
     "react-native/scripts/react_native_pods.rb",
-    {paths: [process.argv[1]]},
+    {paths: [process.argv[1]]}, 
   )', __dir__]).strip
 
 platform :ios, min_ios_version_supported
@@ -27,6 +27,8 @@ end
 
 target 'pokemoni' do
   config = use_native_modules!
+
+  pod 'RNFlashList', :path => '../node_modules/@shopify/flash-list'
 
   use_react_native!(
     :path => config[:reactNativePath],
