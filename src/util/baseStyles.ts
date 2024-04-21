@@ -5,7 +5,7 @@ type AppTextProps = {
   bold?: boolean;
   small?: boolean;
   large?: boolean;
-  fontSize?: number;
+  fontSize?: string;
   center?: boolean;
   right?: boolean;
   left?: boolean;

@@ -52,9 +52,6 @@ const PokemonListComp = ({resource}: PokemonListProps) => {
       <FlashList
         data={pokemons}
         renderItem={renderItem}
-        // renderItem={({item}) => (
-        //   <PokemonCard link={item.url} name={item.name} />
-        // )}
         estimatedItemSize={190}
         numColumns={2}
         contentContainerStyle={styles.container}

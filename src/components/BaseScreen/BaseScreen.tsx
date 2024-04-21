@@ -2,6 +2,7 @@ import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {ScrollView} from 'react-native-virtualized-view';
 import {useNavigation} from '@react-navigation/native';
+import {MenuBtn} from '../MenuBtn/MenuBtn';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -53,6 +54,14 @@ const Content = styled.View`
   flex: 1;
 `;
 
+const MenuBtnWrap = styled.TouchableOpacity`
+  position: absolute;
+  z-index: 1000;
+  padding: 20px;
+  bottom: 10%;
+  right: 20px;
+`;
+
 const BaseScreen = ({children, title, backBtn, header}: BaseScreenProps) => {
   const navigation = useNavigation();
   return (
@@ -72,6 +81,12 @@ const BaseScreen = ({children, title, backBtn, header}: BaseScreenProps) => {
       <SmallBackgroundImage
         source={require('../../../assets/images/backgroundImg.png')}
       />
+
+      {/* Menu Button */}
+      <MenuBtnWrap>
+        <MenuBtn />
+      </MenuBtnWrap>
+
       <Content>
         <ScrollView showsVerticalScrollIndicator={false} centerContent={true}>
           {children}

@@ -10,6 +10,7 @@ import {type PokemonList} from '../../types';
 
 const Wrapper = styled.View`
   flex: 1;
+  position: relative;
 `;
 
 const HomeScreen = () => {
@@ -21,12 +22,12 @@ const HomeScreen = () => {
   const hasData = (resourceData?.results.length ?? 0) > 0;
 
   return (
-    <BaseScreen backBtn={false}>
-      <Wrapper>
-        {loading && !(<LoadingComp />)}
+    <Wrapper>
+      <BaseScreen backBtn={false}>
+        {loading && <LoadingComp />}
         {hasData && resourceData && <PokemonListComp resource={resourceData} />}
-      </Wrapper>
-    </BaseScreen>
+      </BaseScreen>
+    </Wrapper>
   );
 };
 
