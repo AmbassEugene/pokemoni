@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {FlashList} from '@shopify/flash-list';
 import {PokemonCard} from '../PokemonCard/PokemonCard';
 import styled from 'styled-components/native';
@@ -42,13 +42,19 @@ const PokemonListComp = ({resource}: PokemonListProps) => {
     setLoading(false);
   };
 
+  const renderItem = useCallback(
+    ({item}: any) => <PokemonCard link={item.url} name={item.name} />,
+    [],
+  );
+
   return (
     <Wrapper>
       <FlashList
         data={pokemons}
-        renderItem={({item}) => (
-          <PokemonCard link={item.url} name={item.name} />
-        )}
+        renderItem={renderItem}
+        // renderItem={({item}) => (
+        //   <PokemonCard link={item.url} name={item.name} />
+        // )}
         estimatedItemSize={190}
         numColumns={2}
         contentContainerStyle={styles.container}
