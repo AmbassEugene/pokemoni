@@ -57,3 +57,8 @@ export const Tag = styled(AppText)`
   padding: 5px 8px;
   border-radius: 10px;
 `;
+
+export const InputBox = styled.TextInput`
+  color: ${props => props.theme.PRIMARY_TEXT_COLOR};
+  font-family: Mulish-SemiBold;
+`;

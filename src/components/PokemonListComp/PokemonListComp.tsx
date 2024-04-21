@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {FlashList} from '@shopify/flash-list';
 import {PokemonCard} from '../PokemonCard/PokemonCard';
 import styled from 'styled-components/native';
@@ -7,6 +7,8 @@ import {AppText} from '../../util/baseStyles';
 import {SmallLoader} from '../LoadingComp/SmallLoader';
 import {getResource} from '../../util/api/apiRequests';
 import {type PokemonList} from '../../types';
+import {ListHeaderComponent} from './ListHeaderComponent';
+import {ListEmptyComponent} from './ListEmptyComponent';
 
 const Wrapper = styled.View`
   margin-bottom: 10px;
@@ -28,6 +30,8 @@ const PokemonListComp = ({resource}: PokemonListProps) => {
   const [pokemons, setPokemons] = useState(resource.results);
   const [next, setNext] = useState(resource.next);
 
+  const flashListRef = useRef(null);
+
   const getMorePokemons = async (endPoint: string | null) => {
     if (!endPoint) {
       return;
@@ -42,6 +46,15 @@ const PokemonListComp = ({resource}: PokemonListProps) => {
     setLoading(false);
   };
 
+  const handleSearch = (searchTerm: string) => {
+    const rawData = resource.results;
+
+    const SearchResults = rawData.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+    setPokemons(SearchResults);
+  };
+
   const renderItem = useCallback(
     ({item}: any) => <PokemonCard link={item.url} name={item.name} />,
     [],
@@ -50,11 +63,14 @@ const PokemonListComp = ({resource}: PokemonListProps) => {
   return (
     <Wrapper>
       <FlashList
+        ref={flashListRef}
+        ListHeaderComponent={<ListHeaderComponent action={handleSearch} />}
         data={pokemons}
         renderItem={renderItem}
         estimatedItemSize={190}
         numColumns={2}
         contentContainerStyle={styles.container}
+        ListEmptyComponent={<ListEmptyComponent />}
         ListFooterComponent={
           loading ? (
             <SmallLoader />

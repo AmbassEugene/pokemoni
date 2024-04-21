@@ -22,15 +22,26 @@ const Title = styled.Text`
   letter-spacing: 1px;
 `;
 
-const BackButton = styled(Title)`
+const BackBtnWrap = styled.TouchableOpacity`
   position: absolute;
-  color: ${props => props.theme.PRIMARY_TEXT_COLOR};
-  font-size: 18px;
   left: 15px;
   top: 12px;
+`;
+const BackButton = styled(Title)`
+  color: ${props => props.theme.PRIMARY_TEXT_COLOR};
+  font-size: 18px;
   font-weight: 500;
   letter-spacing: 0;
 `;
+// const BackButton = styled(Title)`
+//   position: absolute;
+//   color: ${props => props.theme.PRIMARY_TEXT_COLOR};
+//   font-size: 18px;
+//   left: 15px;
+//   top: 12px;
+//   font-weight: 500;
+//   letter-spacing: 0;
+// `;
 
 const BigBackgroundImage = styled.Image`
   width: 500px;
@@ -70,7 +81,9 @@ const BaseScreen = ({children, title, backBtn, header}: BaseScreenProps) => {
         <Header>
           <Title>{title}</Title>
           {backBtn && (
-            <BackButton onPress={() => navigation.goBack()}>Back</BackButton>
+            <BackBtnWrap onPress={() => navigation.goBack()}>
+              <BackButton>Back</BackButton>
+            </BackBtnWrap>
           )}
         </Header>
       )}

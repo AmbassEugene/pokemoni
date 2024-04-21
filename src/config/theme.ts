@@ -1,6 +1,7 @@
-const colors = {
+export const colors = {
   PRIMARY_COLOR: '#FFB444',
   SECONDARY_COLOR: '#2AADAD',
+  SECONDARY_TEXT_COLOR: '#6C768A',
 };
 
 export const lightTheme = {
