@@ -6,7 +6,7 @@ import {colors} from '../../config/theme';
 const Wrapper = styled.View`
   background-color: ${props => props.theme.SECONDARY_BACKGROUND_COLOR};
   margin-bottom: 10px;
-  padding: 0px 10px;
+  padding: 10px 10px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
