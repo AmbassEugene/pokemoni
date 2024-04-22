@@ -4,6 +4,8 @@ import {ScrollView} from 'react-native-virtualized-view';
 import {useNavigation} from '@react-navigation/native';
 import {MenuBtn} from '../MenuBtn/MenuBtn';
 
+const backgroundImgSrc = require('../../../assets/images/backgroundImg.png');
+
 const Wrapper = styled.View`
   flex: 1;
   background-color: ${props => props.theme.PRIMARY_BACKGROUND_COLOR};
@@ -88,12 +90,8 @@ const BaseScreen = ({children, title, backBtn, header}: BaseScreenProps) => {
         </Header>
       )}
 
-      <BigBackgroundImage
-        source={require('../../../assets/images/backgroundImg.png')}
-      />
-      <SmallBackgroundImage
-        source={require('../../../assets/images/backgroundImg.png')}
-      />
+      <BigBackgroundImage source={backgroundImgSrc} />
+      <SmallBackgroundImage source={backgroundImgSrc} />
 
       {/* Menu Button */}
       <MenuBtnWrap>

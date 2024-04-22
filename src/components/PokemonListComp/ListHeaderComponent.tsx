@@ -43,5 +43,5 @@ export const ListHeaderComponent = ({action}: HeaderProps) => {
 };
 
 type HeaderProps = {
-  action: (query: string) => {};
+  action: (query: string) => void;
 };

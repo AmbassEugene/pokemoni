@@ -1,10 +1,10 @@
-import {createContext} from 'react';
+import {Dispatch, SetStateAction, createContext} from 'react';
 
 export const AppContext = createContext<AppContextType | null>(null);
 
-type AppContextType = {
+export type AppContextType = {
   value: {
-    isDarkmode: boolean;
-    setIsDarkmode: () => {};
-  } | null;
+    isDarkMode: boolean;
+    setIsDarkMode: Dispatch<SetStateAction<boolean>>;
+  };
 };

@@ -46,11 +46,11 @@ const PokemonListComp = ({resource}: PokemonListProps) => {
     setLoading(false);
   };
 
-  const handleSearch = (searchTerm: string) => {
+  const handleSearch = (query: string) => {
     const rawData = resource.results;
 
     const SearchResults = rawData.filter(pokemon =>
-      pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      pokemon.name.toLowerCase().includes(query.toLowerCase()),
     );
     setPokemons(SearchResults);
   };
